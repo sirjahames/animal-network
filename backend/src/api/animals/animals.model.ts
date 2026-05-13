@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma.js";
+import { prisma } from "@/lib/prisma/prisma.js";
 import type { Animal } from "@/types/animal.js";
 
 async function getAnimals(): Promise<Animal[]> {
