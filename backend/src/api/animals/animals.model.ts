@@ -1,11 +1,41 @@
 import { prisma } from "@/lib/prisma/prisma.js";
 import type { Animal } from "@/types/animal.js";
 
-async function getAnimals(): Promise<Animal[]> {
+export async function getAnimals(): Promise<Animal[]> {
     const animals = await prisma.animal.findMany();
     return animals;
 }
 
-export {
-    getAnimals
-};
+export async function getAnimalById(id: number) {
+    const animal = await prisma.animal.findUnique({
+        where: {
+            id,
+        },
+    });
+
+    return animal;
+}
+
+export async function incrementAnimalLikeById(id: number): Promise<boolean> {
+    const animal = await getAnimalById(id);
+    if (!animal) return false;
+
+    await prisma.animal.update({
+        where: { id },
+        data: { likes: animal.likes + 1 }
+    });
+    
+    return true;
+}
+
+export async function decrementAnimalLikeById(id: number): Promise<boolean> {
+    const animal = await getAnimalById(id);
+    if (!animal) return false;
+
+    await prisma.animal.update({
+        where: { id },
+        data: { likes: animal.likes - 1 },
+    });
+
+    return true;
+}
