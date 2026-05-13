@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-type RootLayoutChildren = Readonly<{
+import Providers from "@/providers/providers";
+
+type Props = Readonly<{
     children: React.ReactNode;
 }>;
 
@@ -15,10 +17,14 @@ export const metadata: Metadata = {
     description: "welcome to animal network - a network of animalz!",
 };
 
-export default function RootLayout({ children }: RootLayoutChildren) {
+export default function RootLayout({ children }: Props) {
     return (
         <html lang="en" className="h-full antialiased">
-            <body className={`${inter.className} min-h-full flex flex-col`}>{children}</body>
+            <body className={`${inter.className} min-h-full flex flex-col justify-start`}>
+                <Providers>
+                    {children}
+                </Providers>
+            </body>
         </html>
     );
 }

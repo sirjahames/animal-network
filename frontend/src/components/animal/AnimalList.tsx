@@ -1,6 +1,16 @@
-import { Animal } from "@/types/animal";
+"use client";
+import { useQuery } from "@tanstack/react-query";
+import { getAnimals } from "@/services/animalService";
 
-export default function AnimalList({ animals }: { animals: Animal[] }) {
+export default function AnimalList() {
+    const { isLoading, isError, data } = useQuery({
+        queryKey: ["request-all-animals"],
+        queryFn: getAnimals,
+    });
+
+    if (isLoading) return <p>Loading...</p>;
+    if (isError) return <p>Something bad happened, we&apos;re sorry :(</p>;
+
     return (
         <table className="border border-gray-300 w-full h-full border-collapse">
             <thead>
@@ -12,7 +22,7 @@ export default function AnimalList({ animals }: { animals: Animal[] }) {
                 </tr>
             </thead>
             <tbody>
-                {animals.map((animal) => (
+                {data?.animals.map((animal) => (
                     <tr key={animal.id}>
                         <td className="p-2 border border-gray-300">{animal.name}</td>
                         <td className="p-2 border border-gray-300">{animal.legs}</td>
