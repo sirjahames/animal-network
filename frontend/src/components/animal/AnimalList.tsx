@@ -94,7 +94,7 @@ export default function AnimalList() {
                 </tr>
             </thead>
             <tbody>
-                {data?.animals.map((animal) => (
+                {data?.animals.sort((a, b) => b.likes - a.likes).map((animal) => (
                     <tr key={animal.id}>
                         <TableRow text={animal.name} />
                         <TableRow text={animal.legs} />
