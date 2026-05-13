@@ -15,7 +15,16 @@ async function incrementAnimalLikes({ id }: { id: number }) {
         method: "POST"
     });
 
-    if (!response.ok) throw new Error("Unable to fetch animal data...");
+    if (!response.ok) throw new Error("Unable to update animal data...");
 }
 
-export { getAnimals, incrementAnimalLikes };
+async function decrementAnimalLikes({ id }: { id: number }) {
+    const url = `http://localhost:8080/api/animals/${id}/unlike`;
+    const response = await fetch(url, {
+        method: "POST"
+    });
+
+    if (!response.ok) throw new Error("Unable to update animal data...");
+}
+
+export { getAnimals, incrementAnimalLikes, decrementAnimalLikes };

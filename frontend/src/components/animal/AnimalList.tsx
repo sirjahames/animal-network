@@ -1,11 +1,12 @@
 "use client";
 import { Heart } from "lucide-react";
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { getAnimals, incrementAnimalLikes } from "@/services/animalService";
+import { decrementAnimalLikes, getAnimals, incrementAnimalLikes } from "@/services/animalService";
 import { colHeaders } from "@/constants/animalTable";
 import Loader from "../ui/Loader";
+import { Animal } from "@/types/animal";
 
 type TableHeadProps = { text: string };
 type TableRowProps = { text: string | number; color?: string; children?: React.ReactNode };
@@ -30,10 +31,27 @@ function LikeButton({ liked }: LikeButtonProps) {
 
 function TableLikeRow({ id }: TableLikeRowProps) {
     const [liked, setLiked] = useState(false);
+    const queryClient = useQueryClient();
+
     const likeMutation = useMutation({
-        mutationFn: incrementAnimalLikes,
-        onSuccess: () => {
+        mutationFn: async (options: { id: number }) => {
+            if (liked)
+                return decrementAnimalLikes(options);
+            else
+                return incrementAnimalLikes(options);
+        },
+        onSuccess: (result, variables) => {
             setLiked(!liked);
+
+            queryClient.setQueryData(["request-all-animals"], (old: { animals: Animal[] }) => {
+                if (!old || !old.animals) return old;
+                return {
+                    ...old,
+                    animals: old.animals.map((animal: Animal) =>
+                        animal.id === variables.id ? { ...animal, likes: animal.likes + (liked ? -1 : 1) } : animal
+                    ),
+                };
+            });
         },
     });
 
