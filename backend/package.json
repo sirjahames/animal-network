@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "animal-network-backend",
   "type": "module",
   "main": "dist/index.js",
   "private": true,
