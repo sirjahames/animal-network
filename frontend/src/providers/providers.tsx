@@ -9,9 +9,5 @@ type Props = Readonly<{
 const queryClient = getQueryClient();
 
 export default function Providers({ children }: Props) {
-    return (
-        <QueryClientProvider client={queryClient}>
-            {children}
-        </QueryClientProvider>
-    )
+    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 }

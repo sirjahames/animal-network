@@ -9,21 +9,19 @@ type Props = Readonly<{
 }>;
 
 const inter = Inter({
-    subsets: ["latin"],
+    subsets: ["latin"]
 });
 
 export const metadata: Metadata = {
     title: "Animal Network",
-    description: "welcome to animal network - a network of animalz!",
+    description: "welcome to animal network - a network of animalz!"
 };
 
 export default function RootLayout({ children }: Props) {
     return (
         <html lang="en" className="h-full antialiased">
             <body className={`${inter.className} min-h-full flex flex-col justify-start`}>
-                <Providers>
-                    {children}
-                </Providers>
+                <Providers>{children}</Providers>
             </body>
         </html>
     );

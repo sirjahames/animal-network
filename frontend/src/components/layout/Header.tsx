@@ -5,5 +5,5 @@ export default function Header() {
                 <p className="m-0 font-bold text-lg text-gray-600">animal network</p>
             </div>
         </header>
-    )
+    );
 }

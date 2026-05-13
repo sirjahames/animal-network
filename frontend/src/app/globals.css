@@ -3,13 +3,13 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  margin: 0;
-  padding: 0;
+    background: var(--background);
+    color: var(--foreground);
+    margin: 0;
+    padding: 0;
 }
