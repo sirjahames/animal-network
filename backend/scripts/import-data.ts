@@ -7,8 +7,8 @@ async function main() {
             name: "Dog",
             legs: 4,
             fact: "Dogs have about 1,700 taste buds and will silently judge your snack choices.",
-            likes: 128,
-        },
+            likes: 128
+        }
     });
 
     console.log("Created animal:", animal);

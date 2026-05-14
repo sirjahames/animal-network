@@ -4,4 +4,4 @@ export interface Animal {
     legs: number;
     fact: string;
     likes: number;
-};
+}

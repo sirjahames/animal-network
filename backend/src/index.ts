@@ -2,7 +2,7 @@ import server from "./server.js";
 
 process.on("SIGINT", () => {
     server.close();
-    process.exit(0)
+    process.exit(0);
 });
 
 process.on("SIGTERM", () => {
@@ -14,5 +14,5 @@ process.on("SIGTERM", () => {
 
         console.log(`Server closed successfully!`);
         process.exit(0);
-    })
+    });
 });

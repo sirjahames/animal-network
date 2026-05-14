@@ -9,8 +9,8 @@ export async function getAnimals(): Promise<Animal[]> {
 export async function getAnimalById(id: number) {
     const animal = await prisma.animal.findUnique({
         where: {
-            id,
-        },
+            id
+        }
     });
 
     return animal;
@@ -24,7 +24,7 @@ export async function incrementAnimalLikeById(id: number): Promise<boolean> {
         where: { id },
         data: { likes: animal.likes + 1 }
     });
-    
+
     return true;
 }
 
@@ -34,7 +34,7 @@ export async function decrementAnimalLikeById(id: number): Promise<boolean> {
 
     await prisma.animal.update({
         where: { id },
-        data: { likes: animal.likes - 1 },
+        data: { likes: animal.likes - 1 }
     });
 
     return true;
