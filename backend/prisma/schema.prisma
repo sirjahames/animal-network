@@ -10,7 +10,7 @@ datasource db {
   provider = "postgresql"
 }
 
-model animal {
+model animals {
   id Int @unique @default(autoincrement())
   name String
   legs Int
